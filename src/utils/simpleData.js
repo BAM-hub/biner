@@ -1,3 +1,9 @@
+import { 
+  preprocess,
+  meanBinResult,
+  boundaryBinResult
+} from "./simpleDataProcess";
+
 export function binByMean(data, binMemberCount) {
   let dataArr = data.split(',');
   binMemberCount = parseInt(binMemberCount);
@@ -5,67 +11,27 @@ export function binByMean(data, binMemberCount) {
   //arr.map(a => console.log(a));
   
   let binCount = dataArr.length/binMemberCount;
-
-  if(Number.isInteger(binCount)) {
-    return meanBinResult(dataArr, binMemberCount);
-
-  } else {
-    let lastBinMembers = dataArr.length % binMemberCount;
-    let binMidPoint = binMemberCount * 1/2;
-
-    if (lastBinMembers < binMidPoint) {
-
-      while(! Number.isInteger(binCount)) {
-        dataArr.pop(); 
-        binCount = dataArr.length/binMemberCount;
-      }
-      return meanBinResult(dataArr, binMemberCount);
-
-    } else if( lastBinMembers > binMidPoint ) {
-      console.log('add mean');
-
-      let sum = 0;
-      for(let i = 0; i < dataArr.length; i++ ){
-        sum += parseInt(dataArr[i]);
-      }
-      let mean = sum/dataArr.length;
-      while(! Number.isInteger(binCount)) {
-        dataArr.push(mean); 
-        binCount = dataArr.length/binMemberCount;
-      }
-      console.log(dataArr);
-      return meanBinResult(dataArr, binMemberCount);
-    } else {
-      
-      while(! Number.isInteger(binCount)) {
-        dataArr.pop(); 
-        binCount = dataArr.length/binMemberCount;
-      }
-      return meanBinResult(dataArr, binMemberCount);
-    }
-  };
+  dataArr = preprocess(binCount, dataArr, binMemberCount);
+  return meanBinResult(dataArr, binMemberCount);
 };
 
-function meanBinResult(dataArr, binMemberCount) {
-  let binChecker = 0;
-  let sum = 0;
-  for(let i = 0; i < dataArr.length; i++) {
-    sum += parseInt(dataArr[i]);
-    binChecker++;
+export function binByBoundries (data, binMemberCount) {
+  let dataArr = data.split(',');
+  let newDataArr = [];
+  let binCount = dataArr.length/binMemberCount;
 
-    if(Number.isInteger(binChecker/binMemberCount)){
-      let mean = sum/binMemberCount;
-     
-      for(let u = binChecker; u > binChecker - binMemberCount; u--) {
-        dataArr[u-1] = mean;
-      }
-      sum = 0;
-    }
- 
-  }
+  dataArr = preprocess(binCount, dataArr, binMemberCount);
+  //console.log(dataArr);
+
+  for(let i = 0; i < dataArr.length; i ++) {
+    newDataArr.push(sort(dataArr.splice(0, binMemberCount)));
+  };
+  //console.log(newDataArr);
+  boundaryBinResult(newDataArr, binMemberCount);
+};
+
+function sort(dataArr) {
+  dataArr.sort((a, b) => {return a - b });
   return dataArr;
 };
 
-function binByBoundries (data, binMemberCount) {
-  
-}
