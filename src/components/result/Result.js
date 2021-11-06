@@ -3,18 +3,16 @@ import { ResultContext } from '../../contexts/ResultContext';
 const Result = () => {
 
   const[result, setResult] = useContext(ResultContext);
-  const arrLen = () => {
-    if(result === undefined) {
-      return false;
-    }
-    return true;
-  }
+
   return (
     <div className="result">
       <p>Results:</p>
-      { arrLen()  && (
+      { result !== undefined  && (
         result.map((res) => (
-          <p key={Math.random()}>{res}, </p>
+          <div 
+            className="res"
+            key={Math.random()}
+            >{res}</div>
         ))
       )}
     </div>
