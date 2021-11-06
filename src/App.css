@@ -59,4 +59,56 @@
 
 .result {
   display: flex;
+  align-items: center;
+  padding: 1em;
+}
+
+.res {
+  border: 2px solid black;
+  padding: 0.2em;
+}
+
+.note {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  background: rgb(255, 207, 207);
+  padding: 1em;
+  font-weight: bolder;
+  position: relative;
+}
+
+.note li {
+  list-style: none;
+}
+
+.note button {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  border: none;
+  background: transparent;
+}
+
+.note button:hover {
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.download {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.download button {
+  border: none;
+  background: rgb(152, 243, 255);
+  padding: 0.5em;
+}
+
+.download button:hover {
+  cursor: pointer;
+  background: rgb(162, 245, 206);
 }
