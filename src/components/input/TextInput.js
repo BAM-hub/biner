@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import { DataContext } from '../../contexts/DataContext';
 import { BinContext } from '../../contexts/BinContext';
-import { binByMean, binByBoundries } from '../../utils/simpleData';
+import { binByMean, binByBoundaries } from '../../utils/simpleData';
+import { formatResult } from '../../utils/format';
 import { ResultContext } from '../../contexts/ResultContext';
 
 const TextInput = () => {
@@ -20,7 +21,7 @@ const TextInput = () => {
       setResult(binByMean(data, binCount));
       //console.log(result);
     } else {
-      binByBoundries(data, binCount);
+      setResult(formatResult(binByBoundaries(data, binCount)));
     }
 
   };
