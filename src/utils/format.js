@@ -19,6 +19,13 @@ export function formatData(data) {
     console.log(err);
     return {'err': 'file load failed re try'};
   }
-
-  
 }
+
+export function formatCsvobject (data) {
+  let arr = [];
+  data.map((d) => {
+    return arr.push({'data': d.toString()});
+  });
+  console.log(arr);
+  return arr;
+};
