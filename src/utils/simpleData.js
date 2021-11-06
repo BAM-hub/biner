@@ -15,7 +15,7 @@ export function binByMean(data, binMemberCount) {
   return meanBinResult(dataArr, binMemberCount);
 };
 
-export function binByBoundries (data, binMemberCount) {
+export function binByBoundaries (data, binMemberCount) {
   let dataArr = data.split(',');
   let newDataArr = [];
   let binCount = dataArr.length/binMemberCount;
@@ -27,7 +27,7 @@ export function binByBoundries (data, binMemberCount) {
     newDataArr.push(sort(dataArr.splice(0, binMemberCount)));
   };
   //console.log(newDataArr);
-  boundaryBinResult(newDataArr, binMemberCount);
+  return boundaryBinResult(newDataArr, binMemberCount);
 };
 
 function sort(dataArr) {
