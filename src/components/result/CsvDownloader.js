@@ -1,20 +1,23 @@
-import React from 'react';
-import { CSVDownloader } from 'react-papaparse';
+import React, { useContext } from 'react';
+import { CSVDownloader, jsonToCSV } from 'react-papaparse';
+import { ResultContext } from '../../contexts/ResultContext';
+import { formatCsvobject } from '../../utils/format';
 
 const CsvDownloader = () => {
+  const [result, setResult] = useContext(ResultContext);
+  
   return (
-    <CSVDownloader
-    data={[
-        {
-          "Column 1": "1-1",
-          "Column 2": "1-2",
-          "Column 3": "1-3",
-          "Column 4": "1-4",
-        },]}
+    <div className="download">
+
+      <CSVDownloader
+      className='download'
+      data={() => formatCsvobject(result)}
       type='button'
-    >
-      Download
-    </CSVDownloader>
+      
+      >
+        Download
+      </CSVDownloader>
+    </div>
   );
 };
 
